@@ -2,8 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Apply the new global theme here */
 body {
-  background-color: #F4E3E3;
-  color: #1A1A1A;
-  font-family: 'Helvetica Neue', sans-serif;
+  background-color: #0B0B0B; /* Jet Black */
+  color: #F8F5F0;            /* Soft Ivory */
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbar (Optional but looks premium) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #0B0B0B; 
+}
+::-webkit-scrollbar-thumb {
+  background: #2A2A2A; 
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #C9A24D; /* Gold on hover */
 }
