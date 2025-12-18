@@ -1,17 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 
 const ProductCard = ({ product }) => {
   const { addToCart } = useCart();
+  
+  // FIX 1: Handle both MongoDB "_id" and normal "id"
+  const productId = product._id || product.id;
+
+  // FIX 2: Handle broken images
+  // We use state to track the image. If it fails, we swap it for a placeholder.
+  const [imgSrc, setImgSrc] = useState(product.image);
+
+  const handleImageError = () => {
+    // If the image fails to load (404 or blocked), use this placeholder
+    setImgSrc("https://placehold.co/600x600/f3f4f6/E17688?text=No+Image");
+  };
 
   return (
     <div className="bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 overflow-hidden group">
       {/* IMAGE SECTION */}
-      <Link to={`/product/${product.id}`} className="block relative h-64 overflow-hidden bg-gray-100">
+      <Link to={`/product/${productId}`} className="block relative h-64 overflow-hidden bg-gray-100">
         <img 
-          src={product.image} 
+          src={imgSrc} 
           alt={product.name} 
+          onError={handleImageError} 
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
         />
         {/* Quick Badge for Category */}
@@ -22,7 +35,7 @@ const ProductCard = ({ product }) => {
 
       {/* INFO SECTION */}
       <div className="p-5 text-center">
-        <Link to={`/product/${product.id}`}>
+        <Link to={`/product/${productId}`}>
             <h3 className="font-bold text-lg text-[#1a1a1a] mb-1 hover:text-[#E17688] transition-colors">
             {product.name}
             </h3>
