@@ -1,12 +1,7 @@
 export default {
-    plugins: {
-        tailwindcss: {},
-        autoprefixer: {},
-    },  
+  plugins: {
+    'postcss-nesting': {}, // <--- This fixes the Swiper error
+    tailwindcss: {},
+    autoprefixer: {},
+  },
 }
-
-
-
-
-
-
